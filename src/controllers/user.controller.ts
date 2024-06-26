@@ -3,23 +3,29 @@ import bcrypt from "bcrypt";
 import dbConnection from "../connection.js";
 import jwt from "jsonwebtoken";
 
-export async function adicionaUser(req:Request,res:Response){
-    // const {nome,email,senha} = req.body;
-    // if(!nome || !email ||!senha){
-    //     res.status(400).json({"message": "Ops, algum dados não foi informado !"});
-    //     return;
-    // }
+interface userRegister{
+    nome:string,
+    email:string,
+    senha:string
+}
+
+export async function registerUser(req:Request,res:Response){
+    const {nome,email,senha}:userRegister = req.body;
+
+    if(!nome || !email ||!senha){
+        res.status(400).json({"message": "Ops, algum dados não foi informado !"});
+        return;
+    }
 
     // try{
     //     const hashPassword = await bcrypt.hash(senha,10);
-    //     await dbConnection("usuario").insert({email,"senha":hashPassword,"nome": String(nome).toLowerCase()})
+    //     await dbConnection('usuarios').insert({email,"senha":hashPassword,"nome": String(nome).toLowerCase()})
     //     res.status(201).json({"message": "Usuário criado com sucesso !"});
     // }
     // catch(err){
     //     res.status(500).json({"message": err});
+    //     console.log(err);
     // }
-
-    res.status(200).json({"sla": req.body});
 }
 
 export async function login(req:Request,res:Response){

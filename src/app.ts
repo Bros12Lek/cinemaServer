@@ -8,6 +8,6 @@ const app:Express = express();
 dotenv.config({path : "../.env"})
 
 app.use(cors());
-app.use(router);
 app.use(express.json());
+app.use(router);
 app.listen(3001, () => console.log(`Servidor rodando na porta ${3001}`));
